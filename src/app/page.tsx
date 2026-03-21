@@ -7,132 +7,138 @@ import SearchBar from "@/components/SearchBar";
 import CategoryFilter from "@/components/CategoryFilter";
 import AppCard from "@/components/AppCard";
 import AddAppModal from "@/components/AddAppModal";
+import InstallBanner from "@/components/InstallBanner";
+
+function getGreeting(): string {
+  const hour = new Date().getHours();
+  if (hour >= 5 && hour < 12) return "Buongiorno";
+  if (hour >= 12 && hour < 18) return "Buon pomeriggio";
+  return "Buonasera";
+}
 
 export default function Home() {
   const [apps, setApps] = useState<App[]>(initialApps);
   const [search, setSearch] = useState("");
-  const [category, setCategory] = useState("Tutti");
-  const [showModal, setShowModal] = useState(false);
+  const [activeCategory, setActiveCategory] = useState("Tutte");
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // App filtrate per ricerca e categoria
-  const filtered = useMemo(() => {
+  const filteredApps = useMemo(() => {
     return apps.filter((app) => {
-      const matchSearch =
+      const matchesSearch =
         app.name.toLowerCase().includes(search.toLowerCase()) ||
-        app.description.toLowerCase().includes(search.toLowerCase());
-      const matchCat = category === "Tutti" || app.category === category;
-      return matchSearch && matchCat;
+        app.description?.toLowerCase().includes(search.toLowerCase());
+      const matchesCategory =
+        activeCategory === "Tutte" || app.category === activeCategory;
+      return matchesSearch && matchesCategory;
     });
-  }, [apps, search, category]);
+  }, [apps, search, activeCategory]);
 
-  // App pinnate (mostrate prima)
-  const pinned = filtered.filter((a) => a.pinned);
-  const rest = filtered.filter((a) => !a.pinned);
+  const pinnedApps = filteredApps.filter((app) => app.pinned);
+  const unpinnedApps = filteredApps.filter((app) => !app.pinned);
 
   const handleAddApp = (newApp: App) => {
     setApps((prev) => [...prev, newApp]);
   };
 
-  const now = new Date();
-  const hour = now.getHours();
-  const greeting =
-    hour < 12 ? "Buongiorno" : hour < 18 ? "Buon pomeriggio" : "Buonasera";
-
   return (
-    <main className="min-h-screen px-4 py-10 md:py-16 max-w-6xl mx-auto">
+    <main className="min-h-screen bg-[#0f0f1a] text-white">
+      {/* Background glow effects */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute -top-40 -left-40 w-80 h-80 bg-indigo-500/20 rounded-full blur-3xl" />
+        <div className="absolute -top-20 right-20 w-60 h-60 bg-purple-500/15 rounded-full blur-3xl" />
+        <div className="absolute bottom-20 left-1/3 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl" />
+      </div>
 
-      {/* Header */}
-      <header className="text-center mb-12 animate-[fadeIn_0.5s_ease_forwards]">
-        {/* Logo */}
-        <div className="flex items-center justify-center gap-3 mb-4">
-          <div className="w-12 h-12 rounded-2xl bg-violet-600/20 border border-violet-500/30 flex items-center justify-center animate-float">
-            <Globe size={24} className="text-violet-400" />
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        {/* Header */}
+        <header className="mb-10">
+          <div className="flex items-center gap-2 mb-1">
+            <Sparkles size={16} className="text-indigo-400" />
+            <span className="text-indigo-400 text-sm font-medium">
+              {getGreeting()}
+            </span>
           </div>
-          <h1 className="text-4xl md:text-5xl font-bold gradient-text tracking-tight">
+          <h1 className="text-4xl sm:text-5xl font-bold bg-gradient-to-r from-white via-indigo-200 to-purple-300 bg-clip-text text-transparent">
             Soli Dome
           </h1>
-        </div>
-
-        {/* Saluto dinamico */}
-        <p className="text-dome-muted text-sm md:text-base flex items-center justify-center gap-1.5">
-          <Sparkles size={14} className="text-violet-400" />
-          {greeting} — {apps.length} app disponibili
-        </p>
-      </header>
-
-      {/* Search */}
-      <div className="mb-6 animate-[slideUp_0.4s_ease_forwards]">
-        <SearchBar value={search} onChange={setSearch} />
-      </div>
-
-      {/* Category filter */}
-      <div className="mb-10 animate-[slideUp_0.4s_0.1s_ease_forwards] opacity-0" style={{ animationFillMode: "forwards" }}>
-        <CategoryFilter active={category} onChange={setCategory} />
-      </div>
-
-      {/* Pinned section */}
-      {pinned.length > 0 && (
-        <section className="mb-8">
-          <h2 className="text-xs font-semibold text-dome-muted uppercase tracking-widest mb-4 flex items-center gap-2">
-            <span className="w-4 h-px bg-dome-border" />
-            Preferiti
-            <span className="w-full h-px bg-dome-border" />
-          </h2>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
-            {pinned.map((app, i) => (
-              <AppCard key={app.id} app={app} index={i} />
-            ))}
-          </div>
-        </section>
-      )}
-
-      {/* All apps */}
-      {rest.length > 0 && (
-        <section className="mb-8">
-          {pinned.length > 0 && (
-            <h2 className="text-xs font-semibold text-dome-muted uppercase tracking-widest mb-4 flex items-center gap-2">
-              <span className="w-4 h-px bg-dome-border" />
-              Tutte le app
-              <span className="w-full h-px bg-dome-border" />
-            </h2>
-          )}
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
-            {rest.map((app, i) => (
-              <AppCard key={app.id} app={app} index={i} />
-            ))}
-          </div>
-        </section>
-      )}
-
-      {/* Empty state */}
-      {filtered.length === 0 && (
-        <div className="text-center py-24 animate-[fadeIn_0.3s_ease_forwards]">
-          <div className="text-5xl mb-4">🔍</div>
-          <p className="text-dome-muted text-sm">
-            Nessuna app trovata per &ldquo;{search}&rdquo;
+          <p className="text-gray-400 mt-2 flex items-center gap-1.5">
+            <Globe size={14} />
+            {apps.length} applicazioni disponibili
           </p>
-        </div>
-      )}
+        </header>
 
-      {/* Add app button — floating */}
+        {/* Search */}
+        <div className="mb-6">
+          <SearchBar value={search} onChange={setSearch} />
+        </div>
+
+        {/* Category filter */}
+        <div className="mb-8">
+          <CategoryFilter active={activeCategory} onChange={setActiveCategory} />
+        </div>
+
+        {/* Pinned apps */}
+        {pinnedApps.length > 0 && (
+          <section className="mb-10">
+            <h2 className="text-xs font-semibold text-indigo-400 uppercase tracking-widest mb-4 flex items-center gap-2">
+              <span className="w-4 h-px bg-indigo-400/50" />
+              Preferiti
+              <span className="w-4 h-px bg-indigo-400/50" />
+            </h2>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
+              {pinnedApps.map((app) => (
+                <AppCard key={app.id} app={app} />
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* All apps */}
+        {unpinnedApps.length > 0 && (
+          <section>
+            {pinnedApps.length > 0 && (
+              <h2 className="text-xs font-semibold text-gray-500 uppercase tracking-widest mb-4 flex items-center gap-2">
+                <span className="w-4 h-px bg-gray-500/50" />
+                Tutte le app
+                <span className="w-4 h-px bg-gray-500/50" />
+              </h2>
+            )}
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
+              {unpinnedApps.map((app) => (
+                <AppCard key={app.id} app={app} />
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* Empty state */}
+        {filteredApps.length === 0 && (
+          <div className="text-center py-20 text-gray-500">
+            <Globe size={48} className="mx-auto mb-4 opacity-30" />
+            <p className="text-lg">Nessuna app trovata</p>
+            <p className="text-sm mt-1">Prova con un altro termine di ricerca</p>
+          </div>
+        )}
+      </div>
+
+      {/* FAB Add button */}
       <button
-        onClick={() => setShowModal(true)}
-        className="fixed bottom-8 right-8 w-14 h-14 bg-violet-600 hover:bg-violet-700 rounded-2xl flex items-center justify-center shadow-xl shadow-violet-600/30 transition-all hover:scale-110 active:scale-95 z-40"
-        title="Aggiungi app"
+        onClick={() => setIsModalOpen(true)}
+        className="fixed bottom-8 right-8 w-14 h-14 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-full shadow-lg shadow-indigo-500/40 flex items-center justify-center hover:scale-110 transition-transform z-40"
+        aria-label="Aggiungi app"
       >
-        <Plus size={24} className="text-white" />
+        <Plus size={24} />
       </button>
 
-      {/* Footer */}
-      <footer className="text-center mt-16 text-dome-muted text-xs">
-        Fatto con ✦ da{" "}
-        <span className="gradient-text font-medium">Soli</span>
-      </footer>
+      {/* Add App Modal */}
+      <AddAppModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onAdd={handleAddApp}
+      />
 
-      {/* Modal */}
-      {showModal && (
-        <AddAppModal onClose={() => setShowModal(false)} onAdd={handleAddApp} />
-      )}
+      {/* PWA Install Banner */}
+      <InstallBanner />
     </main>
   );
 }

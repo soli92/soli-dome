@@ -1,138 +1,154 @@
-// 📦 Dati delle tue applicazioni
-// Aggiungi, modifica o rimuovi app da qui
-
 export interface App {
   id: string;
   name: string;
   description: string;
   url: string;
-  icon: string;       // emoji o URL immagine
+  icon: string;
+  color: string;
   category: string;
-  color: string;      // colore accent della card (hex)
   pinned?: boolean;
 }
 
 export const categories = [
-  "Tutti",
-  "Produttività",
+  "Tutte",
   "Sviluppo",
-  "Analytics",
+  "Produttività",
+  "Design",
   "Comunicazione",
-  "Media",
-  "Utilità",
+  "AI",
+  "Mie App",
 ];
 
-export const apps: App[] = [
+export const defaultApps: App[] = [
+  // ── MIE APP ─────────────────────────────────────────────
   {
-    id: "1",
+    id: "pippify",
+    name: "Pippify",
+    description: "La tua app personale Pippify",
+    url: "https://pippify.vercel.app/",
+    icon: "🐾",
+    color: "#f97316",
+    category: "Mie App",
+    pinned: true,
+  },
+  {
+    id: "soli-agent",
+    name: "Soli Agent",
+    description: "Il tuo agente AI personale Soli",
+    url: "https://soli-agent-beta.vercel.app/",
+    icon: "🤖",
+    color: "#a855f7",
+    category: "Mie App",
+    pinned: true,
+  },
+
+  // ── SVILUPPO ─────────────────────────────────────────────
+  {
+    id: "github",
     name: "GitHub",
-    description: "Repository e codice sorgente",
+    description: "Repository e version control",
     url: "https://github.com",
     icon: "🐙",
-    category: "Sviluppo",
     color: "#6e40c9",
-    pinned: true,
+    category: "Sviluppo",
+    pinned: false,
   },
   {
-    id: "2",
+    id: "vercel",
     name: "Vercel",
-    description: "Deploy e hosting delle app",
+    description: "Deploy e hosting frontend",
     url: "https://vercel.com",
     icon: "▲",
-    category: "Sviluppo",
     color: "#ffffff",
-    pinned: true,
-  },
-  {
-    id: "3",
-    name: "Notion",
-    description: "Note, documenti e database",
-    url: "https://notion.so",
-    icon: "📓",
-    category: "Produttività",
-    color: "#ffffff",
-    pinned: true,
-  },
-  {
-    id: "4",
-    name: "Figma",
-    description: "Design e prototipazione UI",
-    url: "https://figma.com",
-    icon: "🎨",
     category: "Sviluppo",
-    color: "#f24e1e",
+    pinned: false,
   },
   {
-    id: "5",
-    name: "Linear",
-    description: "Project management e issue tracking",
-    url: "https://linear.app",
-    icon: "📐",
-    category: "Produttività",
-    color: "#5e6ad2",
-  },
-  {
-    id: "6",
-    name: "Slack",
-    description: "Messaggistica e comunicazione team",
-    url: "https://slack.com",
-    icon: "💬",
-    category: "Comunicazione",
-    color: "#4a154b",
-  },
-  {
-    id: "7",
-    name: "Google Analytics",
-    description: "Statistiche e traffico web",
-    url: "https://analytics.google.com",
-    icon: "📊",
-    category: "Analytics",
-    color: "#e37400",
-  },
-  {
-    id: "8",
-    name: "Supabase",
-    description: "Database e backend as a service",
-    url: "https://supabase.com",
-    icon: "🗄️",
+    id: "vscode",
+    name: "VS Code Web",
+    description: "Editor di codice nel browser",
+    url: "https://vscode.dev",
+    icon: "💙",
+    color: "#007acc",
     category: "Sviluppo",
-    color: "#3ecf8e",
+    pinned: false,
   },
+
+  // ── AI ────────────────────────────────────────────────────
   {
-    id: "9",
-    name: "Spotify",
-    description: "Musica e podcast",
-    url: "https://spotify.com",
-    icon: "🎵",
-    category: "Media",
-    color: "#1db954",
-  },
-  {
-    id: "10",
-    name: "Gmail",
-    description: "Email e posta elettronica",
-    url: "https://mail.google.com",
-    icon: "📧",
-    category: "Comunicazione",
-    color: "#ea4335",
-  },
-  {
-    id: "11",
+    id: "chatgpt",
     name: "ChatGPT",
     description: "Assistente AI OpenAI",
     url: "https://chat.openai.com",
-    icon: "🤖",
-    category: "Utilità",
+    icon: "✨",
     color: "#10a37f",
-    pinned: true,
+    category: "AI",
+    pinned: false,
   },
   {
-    id: "12",
-    name: "Cloudflare",
-    description: "DNS, CDN e sicurezza web",
-    url: "https://cloudflare.com",
-    icon: "☁️",
-    category: "Sviluppo",
-    color: "#f38020",
+    id: "claude",
+    name: "Claude",
+    description: "Assistente AI Anthropic",
+    url: "https://claude.ai",
+    icon: "🧠",
+    color: "#d97706",
+    category: "AI",
+    pinned: false,
+  },
+  {
+    id: "midjourney",
+    name: "Midjourney",
+    description: "Generazione immagini AI",
+    url: "https://midjourney.com",
+    icon: "🎨",
+    color: "#ec4899",
+    category: "AI",
+    pinned: false,
+  },
+
+  // ── PRODUTTIVITÀ ──────────────────────────────────────────
+  {
+    id: "notion",
+    name: "Notion",
+    description: "Note, wiki e project management",
+    url: "https://notion.so",
+    icon: "📝",
+    color: "#ffffff",
+    category: "Produttività",
+    pinned: false,
+  },
+  {
+    id: "linear",
+    name: "Linear",
+    description: "Issue tracking e roadmap",
+    url: "https://linear.app",
+    icon: "📐",
+    color: "#5e6ad2",
+    category: "Produttività",
+    pinned: false,
+  },
+
+  // ── DESIGN ────────────────────────────────────────────────
+  {
+    id: "figma",
+    name: "Figma",
+    description: "Design e prototipazione UI",
+    url: "https://figma.com",
+    icon: "🖌️",
+    color: "#f24e1e",
+    category: "Design",
+    pinned: false,
+  },
+
+  // ── COMUNICAZIONE ─────────────────────────────────────────
+  {
+    id: "slack",
+    name: "Slack",
+    description: "Messaggistica del team",
+    url: "https://slack.com",
+    icon: "💬",
+    color: "#4a154b",
+    category: "Comunicazione",
+    pinned: false,
   },
 ];

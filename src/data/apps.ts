@@ -9,146 +9,120 @@ export interface App {
   pinned?: boolean;
 }
 
-export const categories = [
-  "Tutte",
-  "Sviluppo",
-  "Produttività",
-  "Design",
-  "Comunicazione",
-  "AI",
-  "Mie App",
-];
-
-export const defaultApps: App[] = [
-  // ── MIE APP ─────────────────────────────────────────────
+export const apps: App[] = [
+  // Mie App
   {
     id: "pippify",
     name: "Pippify",
-    description: "La tua app personale Pippify",
+    description: "La mia app personale",
     url: "https://pippify.vercel.app/",
     icon: "🐾",
-    color: "#f97316",
+    color: "from-pink-500 to-rose-500",
     category: "Mie App",
     pinned: true,
   },
   {
     id: "soli-agent",
     name: "Soli Agent",
-    description: "Il tuo agente AI personale Soli",
+    description: "Agente AI personale",
     url: "https://soli-agent-beta.vercel.app/",
     icon: "🤖",
-    color: "#a855f7",
+    color: "from-violet-500 to-purple-500",
     category: "Mie App",
     pinned: true,
   },
-
-  // ── SVILUPPO ─────────────────────────────────────────────
+  // Sviluppo
   {
     id: "github",
     name: "GitHub",
-    description: "Repository e version control",
+    description: "Repository e codice",
     url: "https://github.com",
     icon: "🐙",
-    color: "#6e40c9",
+    color: "from-gray-600 to-gray-800",
     category: "Sviluppo",
-    pinned: false,
   },
   {
     id: "vercel",
     name: "Vercel",
-    description: "Deploy e hosting frontend",
+    description: "Deploy e hosting",
     url: "https://vercel.com",
     icon: "▲",
-    color: "#ffffff",
+    color: "from-slate-600 to-slate-900",
     category: "Sviluppo",
-    pinned: false,
   },
   {
-    id: "vscode",
-    name: "VS Code Web",
-    description: "Editor di codice nel browser",
-    url: "https://vscode.dev",
-    icon: "💙",
-    color: "#007acc",
-    category: "Sviluppo",
-    pinned: false,
+    id: "figma",
+    name: "Figma",
+    description: "Design e prototipi",
+    url: "https://figma.com",
+    icon: "🎨",
+    color: "from-purple-500 to-pink-500",
+    category: "Design",
   },
-
-  // ── AI ────────────────────────────────────────────────────
+  // Produttività
+  {
+    id: "notion",
+    name: "Notion",
+    description: "Note e documenti",
+    url: "https://notion.so",
+    icon: "📝",
+    color: "from-gray-700 to-gray-900",
+    category: "Produttività",
+  },
+  {
+    id: "linear",
+    name: "Linear",
+    description: "Project management",
+    url: "https://linear.app",
+    icon: "📋",
+    color: "from-indigo-500 to-blue-600",
+    category: "Produttività",
+  },
+  {
+    id: "slack",
+    name: "Slack",
+    description: "Messaggistica team",
+    url: "https://slack.com",
+    icon: "💬",
+    color: "from-yellow-400 to-orange-500",
+    category: "Comunicazione",
+  },
+  // AI
   {
     id: "chatgpt",
     name: "ChatGPT",
     description: "Assistente AI OpenAI",
     url: "https://chat.openai.com",
-    icon: "✨",
-    color: "#10a37f",
+    icon: "🧠",
+    color: "from-green-500 to-teal-600",
     category: "AI",
-    pinned: false,
   },
   {
     id: "claude",
     name: "Claude",
     description: "Assistente AI Anthropic",
     url: "https://claude.ai",
-    icon: "🧠",
-    color: "#d97706",
+    icon: "✨",
+    color: "from-orange-400 to-amber-500",
     category: "AI",
-    pinned: false,
   },
   {
     id: "midjourney",
     name: "Midjourney",
     description: "Generazione immagini AI",
     url: "https://midjourney.com",
-    icon: "🎨",
-    color: "#ec4899",
+    icon: "🖼️",
+    color: "from-blue-500 to-cyan-500",
     category: "AI",
-    pinned: false,
   },
-
-  // ── PRODUTTIVITÀ ──────────────────────────────────────────
+  // Utility
   {
-    id: "notion",
-    name: "Notion",
-    description: "Note, wiki e project management",
-    url: "https://notion.so",
-    icon: "📝",
-    color: "#ffffff",
-    category: "Produttività",
-    pinned: false,
-  },
-  {
-    id: "linear",
-    name: "Linear",
-    description: "Issue tracking e roadmap",
-    url: "https://linear.app",
-    icon: "📐",
-    color: "#5e6ad2",
-    category: "Produttività",
-    pinned: false,
-  },
-
-  // ── DESIGN ────────────────────────────────────────────────
-  {
-    id: "figma",
-    name: "Figma",
-    description: "Design e prototipazione UI",
-    url: "https://figma.com",
-    icon: "🖌️",
-    color: "#f24e1e",
-    category: "Design",
-    pinned: false,
-  },
-
-  // ── COMUNICAZIONE ─────────────────────────────────────────
-  {
-    id: "slack",
-    name: "Slack",
-    description: "Messaggistica del team",
-    url: "https://slack.com",
-    icon: "💬",
-    color: "#4a154b",
-    category: "Comunicazione",
-    pinned: false,
+    id: "google",
+    name: "Google",
+    description: "Motore di ricerca",
+    url: "https://google.com",
+    icon: "🔍",
+    color: "from-blue-400 to-green-400",
+    category: "Utility",
   },
 ];

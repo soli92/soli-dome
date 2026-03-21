@@ -1,24 +1,27 @@
 "use client";
 
+import { Dispatch, SetStateAction } from "react";
 import { categories } from "@/data/apps";
 
 interface CategoryFilterProps {
   active: string;
-  onChange: (category: string) => void;
+  onChange: Dispatch<SetStateAction<string>>;
 }
 
 export default function CategoryFilter({ active, onChange }: CategoryFilterProps) {
   return (
-    <div className="flex flex-wrap gap-2">
-      {categories.map((cat) => (
+    <div className="flex gap-2 overflow-x-auto pb-1 -mx-4 px-4 sm:mx-0 sm:px-0 sm:flex-wrap sm:justify-center"
+      style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+    >
+      {["Tutte", ...categories].map((cat) => (
         <button
           key={cat}
           onClick={() => onChange(cat)}
-          className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-200 ${
-            active === cat
-              ? "bg-indigo-600 text-white shadow-lg shadow-indigo-500/30"
-              : "bg-white/5 text-white/60 hover:bg-white/10 hover:text-white"
-          }`}
+          className={`pill flex-shrink-0 px-4 py-2 rounded-full text-xs font-medium border
+            ${active === cat
+              ? "pill-active"
+              : "glass text-white/50 border-white/10 hover:text-white/80"
+            }`}
         >
           {cat}
         </button>

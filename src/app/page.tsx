@@ -2,8 +2,7 @@
 
 import { useState, useMemo } from "react";
 import { Plus, Globe, Sparkles } from "lucide-react";
-import { apps as initialApps, App } from "@/data/apps";
-import { categories } from "@/data/apps";
+import { apps as initialApps, categories, App } from "@/data/apps";
 import SearchBar from "@/components/SearchBar";
 import CategoryFilter from "@/components/CategoryFilter";
 import AppCard from "@/components/AppCard";
@@ -11,83 +10,95 @@ import AddAppModal from "@/components/AddAppModal";
 import InstallBanner from "@/components/InstallBanner";
 import ServiceWorkerRegister from "@/components/ServiceWorkerRegister";
 
-function getGreeting() {
-  const h = new Date().getHours();
-  if (h < 12) return "Buongiorno ☀️";
-  if (h < 18) return "Buon pomeriggio 🌤️";
-  return "Buonasera 🌙";
-}
-
 export default function Home() {
-  const [appList, setAppList]         = useState<App[]>(initialApps);
-  const [search, setSearch]           = useState("");
-  const [activeCategory, setCategory] = useState("Tutte");
-  const [showModal, setShowModal]     = useState(false);
+  const [apps, setApps] = useState<App[]>(initialApps);
+  const [search, setSearch] = useState("");
+  const [activeCategory, setActiveCategory] = useState("Tutte");
+  const [showModal, setShowModal] = useState(false);
+
+  const greeting = useMemo(() => {
+    const h = new Date().getHours();
+    if (h < 12) return "Buongiorno";
+    if (h < 18) return "Buon pomeriggio";
+    return "Buonasera";
+  }, []);
 
   const filtered = useMemo(() => {
-    return appList.filter((a) => {
-      const matchCat  = activeCategory === "Tutte" || a.category === activeCategory;
-      const matchSearch = a.name.toLowerCase().includes(search.toLowerCase()) ||
-                          a.description.toLowerCase().includes(search.toLowerCase());
-      return matchCat && matchSearch;
+    return apps.filter((app) => {
+      const matchSearch =
+        app.name.toLowerCase().includes(search.toLowerCase()) ||
+        app.description.toLowerCase().includes(search.toLowerCase());
+      const matchCat =
+        activeCategory === "Tutte" || app.category === activeCategory;
+      return matchSearch && matchCat;
     });
-  }, [appList, search, activeCategory]);
+  }, [apps, search, activeCategory]);
 
-  const pinned   = filtered.filter((a) => a.pinned);
+  const pinned = filtered.filter((a) => a.pinned);
   const unpinned = filtered.filter((a) => !a.pinned);
 
-  const handleAdd = (newApp: App) => {
-    setAppList((prev) => [...prev, newApp]);
+  const handleAdd = (app: App) => {
+    setApps((prev) => [...prev, app]);
+    setShowModal(false);
   };
 
   return (
     <>
       <ServiceWorkerRegister />
-      <InstallBanner />
 
-      {/* Wrapper principale: scroll libero */}
-      <div className="min-h-screen w-full bg-[#0a0a0f] text-white">
-
-        {/* Sfondo decorativo */}
-        <div className="fixed inset-0 pointer-events-none -z-10">
-          <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] rounded-full bg-purple-700/20 blur-[120px] animate-glow" />
-          <div className="absolute bottom-[-10%] right-[-10%] w-[400px] h-[400px] rounded-full bg-blue-700/20 blur-[100px] animate-glow" style={{ animationDelay: "1.5s" }} />
-        </div>
+      {/* Tutto il layout è un normale div che fluisce — scroll sul body */}
+      <div className="bg-animated min-h-screen">
+        <InstallBanner />
 
         {/* Header */}
-        <header className="sticky top-0 z-40 glass border-b border-white/5 safe-top">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between gap-4">
-            <div className="flex items-center gap-2">
-              <Sparkles className="w-6 h-6 text-purple-400" />
-              <span className="text-xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
-                Soli Dome
+        <header className="glass sticky top-0 z-40 safe-top">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-lg">
+                <Globe className="w-5 h-5 text-white" />
+              </div>
+              <div>
+                <h1 className="text-lg font-bold text-white leading-none">Soli Dome</h1>
+                <p className="text-xs text-white/40 leading-none mt-0.5">Il tuo portale personale</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-3">
+              <span className="hidden sm:flex items-center gap-1.5 text-sm text-white/50">
+                <Sparkles className="w-3.5 h-3.5" />
+                {greeting}
               </span>
-            </div>
-            <div className="flex-1 max-w-md">
-              <SearchBar value={search} onChange={setSearch} />
-            </div>
-            <div className="hidden sm:flex items-center gap-1 text-sm text-white/40">
-              <Globe className="w-4 h-4" />
-              <span>{getGreeting()}</span>
+              <button
+                onClick={() => setShowModal(true)}
+                className="flex items-center gap-2 px-3 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-medium transition-colors"
+              >
+                <Plus className="w-4 h-4" />
+                <span className="hidden sm:inline">Aggiungi</span>
+              </button>
             </div>
           </div>
         </header>
 
-        {/* Contenuto scrollabile */}
+        {/* Main content — padding bottom ampio per non tagliare l'ultima riga */}
         <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 pb-24">
+          {/* Search */}
+          <div className="mb-6">
+            <SearchBar value={search} onChange={setSearch} />
+          </div>
 
-          {/* Filtri categoria */}
-          <CategoryFilter
-            categories={categories}
-            active={activeCategory}
-            onChange={setCategory}
-          />
+          {/* Categories */}
+          <div className="mb-8">
+            <CategoryFilter
+              categories={categories}
+              active={activeCategory}
+              onChange={setActiveCategory}
+            />
+          </div>
 
-          {/* Pinnate */}
+          {/* Pinned */}
           {pinned.length > 0 && (
-            <section className="mb-10 animate-slide-up">
-              <h2 className="text-xs font-semibold uppercase tracking-widest text-white/30 mb-4 flex items-center gap-2">
-                <span>⭐</span> In evidenza
+            <section className="mb-10">
+              <h2 className="text-xs font-semibold text-white/40 uppercase tracking-widest mb-4 flex items-center gap-2">
+                <span>⭐</span> Preferiti
               </h2>
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
                 {pinned.map((app) => (
@@ -97,14 +108,12 @@ export default function Home() {
             </section>
           )}
 
-          {/* Tutte le altre */}
+          {/* All apps */}
           {unpinned.length > 0 && (
-            <section className="animate-slide-up" style={{ animationDelay: "0.1s" }}>
-              {pinned.length > 0 && (
-                <h2 className="text-xs font-semibold uppercase tracking-widest text-white/30 mb-4">
-                  Tutte le app
-                </h2>
-              )}
+            <section>
+              <h2 className="text-xs font-semibold text-white/40 uppercase tracking-widest mb-4 flex items-center gap-2">
+                <Globe className="w-3.5 h-3.5" /> Tutte le app
+              </h2>
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
                 {unpinned.map((app) => (
                   <AppCard key={app.id} app={app} />
@@ -115,31 +124,23 @@ export default function Home() {
 
           {/* Empty state */}
           {filtered.length === 0 && (
-            <div className="flex flex-col items-center justify-center py-32 text-white/30 animate-fade-in">
+            <div className="flex flex-col items-center justify-center py-32 text-white/30">
               <Globe className="w-12 h-12 mb-4" />
               <p className="text-lg font-medium">Nessuna app trovata</p>
-              <p className="text-sm mt-1">Prova a cercare qualcosa di diverso</p>
+              <p className="text-sm mt-1">Prova con un altro termine o categoria</p>
             </div>
           )}
         </main>
-
-        {/* FAB Aggiungi */}
-        <button
-          onClick={() => setShowModal(true)}
-          className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center shadow-lg shadow-purple-500/30 hover:scale-110 transition-transform"
-          aria-label="Aggiungi app"
-        >
-          <Plus className="w-6 h-6 text-white" />
-        </button>
-
-        {/* Modal */}
-        {showModal && (
-          <AddAppModal
-            onAdd={handleAdd}
-            onClose={() => setShowModal(false)}
-          />
-        )}
       </div>
+
+      {/* Modal */}
+      {showModal && (
+        <AddAppModal
+          onAdd={handleAdd}
+          onClose={() => setShowModal(false)}
+          categories={categories}
+        />
+      )}
     </>
   );
 }

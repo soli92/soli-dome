@@ -2,67 +2,133 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Reset completo — niente blocca lo scroll */
-*, *::before, *::after {
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+* {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 html {
-  height: 100%;
-  overflow-y: scroll; /* forza scrollbar sempre visibile, evita layout shift */
+  scroll-behavior: smooth;
 }
 
 body {
-  min-height: 100%;
-  overflow-x: hidden;
-  background-color: #0a0a0f;
+  font-family: 'Inter', sans-serif;
+  background: #080C14;
   color: #ffffff;
-  font-family: var(--font-inter), system-ui, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  /* MAI overflow: hidden sul body */
+  overflow-x: hidden;
+  overflow-y: scroll;
+  min-height: 100vh;
+  -webkit-overflow-scrolling: touch;
 }
 
-/* Scrollbar sottile per desktop */
-::-webkit-scrollbar {
-  width: 6px;
-}
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.15);
-  border-radius: 3px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.3);
+/* Scrollbar sottile */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
+
+/* Background animato */
+.bg-mesh {
+  background-color: #080C14;
+  background-image:
+    radial-gradient(ellipse 80% 50% at 20% 10%, rgba(99, 102, 241, 0.12) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% 80%, rgba(139, 92, 246, 0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 30% at 50% 50%, rgba(59, 130, 246, 0.05) 0%, transparent 60%);
 }
 
-/* Sfondo animato */
-.bg-animated {
-  background: 
-    radial-gradient(ellipse at 20% 20%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 80%, rgba(168, 85, 247, 0.15) 0%, transparent 50%),
-    radial-gradient(ellipse at 50% 50%, rgba(59, 130, 246, 0.08) 0%, transparent 70%),
-    #0a0a0f;
-}
-
-/* Glassmorphism */
+/* Glass card */
 .glass {
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.glass-hover {
+  transition: all 0.25s ease;
+}
+
+.glass-hover:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.14);
+  transform: translateY(-3px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* Search input */
+.search-input {
   background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.2s ease;
 }
 
-/* Card hover */
-.app-card {
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-.app-card:hover {
-  transform: translateY(-4px);
+.search-input:focus {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(99, 102, 241, 0.5);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+  outline: none;
 }
 
-/* Safe area per mobile */
-.safe-top { padding-top: env(safe-area-inset-top); }
+/* Category pill */
+.pill {
+  transition: all 0.2s ease;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.pill:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.pill-active {
+  background: rgba(99, 102, 241, 0.2) !important;
+  border-color: rgba(99, 102, 241, 0.5) !important;
+  color: #a5b4fc !important;
+}
+
+/* App icon glow */
+.icon-glow {
+  transition: all 0.25s ease;
+}
+
+.app-card:hover .icon-glow {
+  filter: brightness(1.2) saturate(1.3);
+  box-shadow: 0 8px 24px var(--glow-color, rgba(99,102,241,0.4));
+}
+
+/* Animazioni */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.4s ease forwards;
+}
+
+@keyframes pulse-slow {
+  0%, 100% { opacity: 0.6; }
+  50%       { opacity: 1; }
+}
+
+.pulse-slow { animation: pulse-slow 3s ease-in-out infinite; }
+
+/* Install banner */
+.install-banner {
+  background: linear-gradient(135deg, rgba(99,102,241,0.15), rgba(139,92,246,0.15));
+  border: 1px solid rgba(99,102,241,0.3);
+  backdrop-filter: blur(20px);
+}
+
+/* Safe area mobile */
 .safe-bottom { padding-bottom: env(safe-area-inset-bottom); }
+.safe-top    { padding-top: env(safe-area-inset-top); }
+
+/* Mobile tap highlight */
+@media (max-width: 768px) {
+  * { -webkit-tap-highlight-color: transparent; }
+  .app-card:active { transform: scale(0.95); transition: transform 0.1s ease; }
+}

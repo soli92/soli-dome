@@ -2,135 +2,189 @@
 
 import { useState } from "react";
 import { X, Plus } from "lucide-react";
-import { App } from "@/data/apps";
+import { App, categories } from "@/data/apps";
 
 interface AddAppModalProps {
-  onClose: () => void;
   onAdd: (app: App) => void;
+  onClose: () => void;
 }
 
+const EMOJIS = ["🚀","💡","🎯","📊","🛠️","🎨","📱","🌐","💬","📁","⚡","🔒","🤖","🎵","📷","🗂️"];
 const COLORS = [
-  "#6c63ff", "#a78bfa", "#ec4899", "#f59e0b",
-  "#10b981", "#3b82f6", "#ef4444", "#f97316",
+  "#6366f1","#8b5cf6","#ec4899","#f59e0b",
+  "#10b981","#3b82f6","#ef4444","#14b8a6",
 ];
 
-export default function AddAppModal({ onClose, onAdd }: AddAppModalProps) {
-  const [form, setForm] = useState({
-    name: "",
-    description: "",
-    url: "",
-    icon: "🔗",
-    category: "Utilità",
-    color: "#6c63ff",
-  });
+export default function AddAppModal({ onAdd, onClose }: AddAppModalProps) {
+  const [name, setName] = useState("");
+  const [url, setUrl] = useState("");
+  const [description, setDescription] = useState("");
+  const [category, setCategory] = useState(categories[0]);
+  const [icon, setIcon] = useState("🚀");
+  const [color, setColor] = useState("#6366f1");
+  const [pinned, setPinned] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!form.name || !form.url) return;
-
-    const newApp: App = {
+    if (!name.trim() || !url.trim()) return;
+    onAdd({
       id: Date.now().toString(),
-      ...form,
-    };
-    onAdd(newApp);
-    onClose();
+      name: name.trim(),
+      url: url.startsWith("http") ? url.trim() : `https://${url.trim()}`,
+      description: description.trim(),
+      category,
+      icon,
+      color,
+      pinned,
+    });
   };
 
   return (
-    <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4"
-      onClick={(e) => e.target === e.currentTarget && onClose()}
-    >
-      {/* Backdrop */}
-      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={onClose} />
+    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4">
+      {/* Overlay */}
+      <div
+        className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+        onClick={onClose}
+      />
 
       {/* Modal */}
-      <div className="relative glass rounded-3xl p-6 w-full max-w-md border border-white/10 animate-[slideUp_0.3s_ease_forwards]">
+      <div className="relative w-full sm:max-w-md glass border border-white/10 rounded-t-3xl sm:rounded-3xl p-6 shadow-2xl z-10 safe-bottom">
+        {/* Handle mobile */}
+        <div className="sm:hidden w-10 h-1 bg-white/20 rounded-full mx-auto mb-5" />
+
+        {/* Header */}
         <div className="flex items-center justify-between mb-6">
-          <h2 className="text-dome-text font-semibold text-lg">Aggiungi App</h2>
-          <button onClick={onClose} className="text-dome-muted hover:text-dome-text transition-colors">
-            <X size={20} />
+          <h2 className="text-lg font-bold text-white">Aggiungi app</h2>
+          <button
+            onClick={onClose}
+            className="w-8 h-8 rounded-xl glass flex items-center justify-center text-white/50 hover:text-white transition-colors"
+          >
+            <X className="w-4 h-4" />
           </button>
         </div>
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-          {/* Nome & Icona */}
-          <div className="flex gap-3">
-            <div className="flex flex-col gap-1 w-20">
-              <label className="text-xs text-dome-muted">Icona</label>
-              <input
-                type="text"
-                value={form.icon}
-                onChange={(e) => setForm({ ...form, icon: e.target.value })}
-                className="glass border border-white/10 rounded-xl px-3 py-2 text-center text-xl focus:border-violet-500/50 transition-colors"
-                maxLength={2}
-              />
+          {/* Preview */}
+          <div className="flex items-center gap-3 p-3 rounded-2xl bg-white/5 border border-white/10">
+            <div
+              className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl flex-shrink-0"
+              style={{ background: `${color}22`, border: `1px solid ${color}44` }}
+            >
+              {icon}
             </div>
-            <div className="flex flex-col gap-1 flex-1">
-              <label className="text-xs text-dome-muted">Nome *</label>
-              <input
-                type="text"
-                value={form.name}
-                onChange={(e) => setForm({ ...form, name: e.target.value })}
-                placeholder="Es. Notion"
-                className="glass border border-white/10 rounded-xl px-3 py-2 text-sm text-dome-text placeholder-dome-muted focus:border-violet-500/50 transition-colors"
-                required
-              />
+            <div>
+              <p className="text-sm font-semibold text-white">{name || "Nome app"}</p>
+              <p className="text-xs text-white/40">{url || "https://..."}</p>
             </div>
           </div>
 
-          {/* URL */}
-          <div className="flex flex-col gap-1">
-            <label className="text-xs text-dome-muted">URL *</label>
-            <input
-              type="url"
-              value={form.url}
-              onChange={(e) => setForm({ ...form, url: e.target.value })}
-              placeholder="https://..."
-              className="glass border border-white/10 rounded-xl px-3 py-2 text-sm text-dome-text placeholder-dome-muted focus:border-violet-500/50 transition-colors"
-              required
-            />
+          {/* Emoji picker */}
+          <div>
+            <label className="text-xs text-white/40 mb-2 block font-medium">Icona</label>
+            <div className="flex flex-wrap gap-2">
+              {EMOJIS.map((e) => (
+                <button
+                  key={e}
+                  type="button"
+                  onClick={() => setIcon(e)}
+                  className={`w-9 h-9 rounded-xl text-lg flex items-center justify-center transition-all
+                    ${icon === e ? "bg-indigo-500/30 border-2 border-indigo-400" : "bg-white/5 border border-white/10 hover:bg-white/10"}`}
+                >
+                  {e}
+                </button>
+              ))}
+            </div>
           </div>
 
-          {/* Descrizione */}
-          <div className="flex flex-col gap-1">
-            <label className="text-xs text-dome-muted">Descrizione</label>
-            <input
-              type="text"
-              value={form.description}
-              onChange={(e) => setForm({ ...form, description: e.target.value })}
-              placeholder="Breve descrizione..."
-              className="glass border border-white/10 rounded-xl px-3 py-2 text-sm text-dome-text placeholder-dome-muted focus:border-violet-500/50 transition-colors"
-            />
-          </div>
-
-          {/* Colore */}
-          <div className="flex flex-col gap-2">
-            <label className="text-xs text-dome-muted">Colore</label>
-            <div className="flex gap-2 flex-wrap">
+          {/* Color picker */}
+          <div>
+            <label className="text-xs text-white/40 mb-2 block font-medium">Colore</label>
+            <div className="flex gap-2">
               {COLORS.map((c) => (
                 <button
                   key={c}
                   type="button"
-                  onClick={() => setForm({ ...form, color: c })}
-                  className="w-7 h-7 rounded-full transition-all"
-                  style={{
-                    background: c,
-                    outline: form.color === c ? `2px solid ${c}` : "none",
-                    outlineOffset: "2px",
-                  }}
+                  onClick={() => setColor(c)}
+                  className={`w-8 h-8 rounded-full transition-all ${color === c ? "ring-2 ring-white ring-offset-2 ring-offset-transparent scale-110" : ""}`}
+                  style={{ background: c }}
                 />
               ))}
+            </div>
+          </div>
+
+          {/* Nome */}
+          <div>
+            <label className="text-xs text-white/40 mb-1.5 block font-medium">Nome *</label>
+            <input
+              type="text"
+              placeholder="Es. Notion"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+              className="search-input w-full px-4 py-3 rounded-xl text-sm text-white placeholder-white/30"
+            />
+          </div>
+
+          {/* URL */}
+          <div>
+            <label className="text-xs text-white/40 mb-1.5 block font-medium">URL *</label>
+            <input
+              type="text"
+              placeholder="https://notion.so"
+              value={url}
+              onChange={(e) => setUrl(e.target.value)}
+              required
+              className="search-input w-full px-4 py-3 rounded-xl text-sm text-white placeholder-white/30"
+            />
+          </div>
+
+          {/* Descrizione */}
+          <div>
+            <label className="text-xs text-white/40 mb-1.5 block font-medium">Descrizione</label>
+            <input
+              type="text"
+              placeholder="Breve descrizione..."
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              className="search-input w-full px-4 py-3 rounded-xl text-sm text-white placeholder-white/30"
+            />
+          </div>
+
+          {/* Categoria + Pinned */}
+          <div className="flex gap-3">
+            <div className="flex-1">
+              <label className="text-xs text-white/40 mb-1.5 block font-medium">Categoria</label>
+              <select
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
+                className="search-input w-full px-4 py-3 rounded-xl text-sm text-white bg-transparent"
+              >
+                {categories.map((c) => (
+                  <option key={c} value={c} className="bg-gray-900">{c}</option>
+                ))}
+              </select>
+            </div>
+            <div className="flex-shrink-0">
+              <label className="text-xs text-white/40 mb-1.5 block font-medium">Preferita</label>
+              <button
+                type="button"
+                onClick={() => setPinned(!pinned)}
+                className={`w-full h-[46px] px-4 rounded-xl border text-sm font-medium transition-all
+                  ${pinned ? "bg-indigo-500/20 border-indigo-500/40 text-indigo-300" : "bg-white/5 border-white/10 text-white/40"}`}
+              >
+                {pinned ? "⭐ Sì" : "☆ No"}
+              </button>
             </div>
           </div>
 
           {/* Submit */}
           <button
             type="submit"
-            className="mt-2 flex items-center justify-center gap-2 bg-violet-600 hover:bg-violet-700 text-white rounded-xl py-2.5 text-sm font-medium transition-colors"
+            disabled={!name || !url}
+            className="w-full py-3.5 rounded-xl bg-indigo-500 hover:bg-indigo-400 disabled:opacity-40 disabled:cursor-not-allowed text-white font-semibold text-sm transition-all flex items-center justify-center gap-2 mt-1"
           >
-            <Plus size={16} />
-            Aggiungi App
+            <Plus className="w-4 h-4" />
+            Aggiungi app
           </button>
         </form>
       </div>

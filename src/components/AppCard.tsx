@@ -1,6 +1,5 @@
 "use client";
 
-import { ExternalLink, Pin } from "lucide-react";
 import { App } from "@/data/apps";
 
 interface AppCardProps {
@@ -9,61 +8,48 @@ interface AppCardProps {
 }
 
 export default function AppCard({ app, index }: AppCardProps) {
-  const delay = `${(index % 6) * 60}ms`;
-
   return (
     <a
       href={app.url}
       target="_blank"
       rel="noopener noreferrer"
-      className="app-card group relative glass rounded-2xl p-5 border border-white/5 hover:border-violet-500/30 flex flex-col gap-3 cursor-pointer animate-[slideUp_0.4s_ease_forwards] opacity-0"
-      style={{ animationDelay: delay, animationFillMode: "forwards" }}
+      className="app-card group block"
+      style={{ animationDelay: `${index * 40}ms` }}
     >
-      {/* Pin badge */}
-      {app.pinned && (
-        <div className="absolute top-3 right-3 text-violet-400 opacity-60">
-          <Pin size={12} fill="currentColor" />
-        </div>
-      )}
-
-      {/* Colored glow on hover */}
       <div
-        className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
-        style={{
-          background: `radial-gradient(circle at 50% 0%, ${app.color}15 0%, transparent 70%)`,
-        }}
-      />
-
-      {/* Icon */}
-      <div
-        className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl flex-shrink-0 relative"
-        style={{ background: `${app.color}20`, border: `1px solid ${app.color}30` }}
+        className="glass glass-hover rounded-2xl p-4 flex flex-col items-center gap-3 text-center h-full fade-in-up"
+        style={{ "--glow-color": `${app.color}55` } as React.CSSProperties}
       >
-        {app.icon}
-      </div>
-
-      {/* Info */}
-      <div className="flex-1 min-w-0">
-        <h3 className="text-dome-text font-semibold text-sm truncate group-hover:text-white transition-colors">
-          {app.name}
-        </h3>
-        <p className="text-dome-muted text-xs mt-0.5 line-clamp-2 leading-relaxed">
-          {app.description}
-        </p>
-      </div>
-
-      {/* Footer */}
-      <div className="flex items-center justify-between">
-        <span
-          className="text-xs px-2 py-0.5 rounded-full font-medium"
-          style={{ background: `${app.color}20`, color: app.color }}
+        {/* Icona */}
+        <div
+          className="icon-glow w-14 h-14 rounded-2xl flex items-center justify-center text-2xl flex-shrink-0 relative overflow-hidden"
+          style={{ background: `${app.color}22`, border: `1px solid ${app.color}44` }}
         >
-          {app.category}
-        </span>
-        <ExternalLink
-          size={14}
-          className="text-dome-muted opacity-0 group-hover:opacity-100 transition-opacity"
-        />
+          <div
+            className="absolute inset-0 opacity-20 rounded-2xl"
+            style={{ background: `radial-gradient(circle at 30% 30%, ${app.color}, transparent 70%)` }}
+          />
+          <span className="relative z-10">{app.icon}</span>
+        </div>
+
+        {/* Nome */}
+        <div className="flex flex-col gap-0.5 min-w-0 w-full">
+          <span className="text-sm font-semibold text-white/90 leading-tight truncate">
+            {app.name}
+          </span>
+          {app.description && (
+            <span className="text-xs text-white/40 leading-tight line-clamp-2">
+              {app.description}
+            </span>
+          )}
+        </div>
+
+        {/* Pinned badge */}
+        {app.pinned && (
+          <span className="text-xs px-2 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 font-medium">
+            ⭐ Preferita
+          </span>
+        )}
       </div>
     </a>
   );

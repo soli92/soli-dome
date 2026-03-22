@@ -21,6 +21,16 @@ export const categories = [
 
 export const apps: App[] = [
   {
+    id: "casa-mia",
+    name: "Casa Mia",
+    description: "Gestione domestica completa",
+    url: "https://casa-mia-fe.vercel.app/",
+    icon: "🏠",
+    color: "#3b82f6",
+    category: "Mie App",
+    pinned: true,
+  },
+  {
     id: "pippify",
     name: "Pippify",
     description: "La tua app personale",

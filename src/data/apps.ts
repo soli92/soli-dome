@@ -19,6 +19,10 @@ export const categories = [
   "AI",
 ];
 
+/** Categoria iniziale per “Aggiungi app” (esclude il filtro aggregato "Tutte"). */
+export const defaultNewAppCategory =
+  categories.find((c) => c !== "Tutte") ?? categories[0];
+
 export const apps: App[] = [
   {
     id: "casa-mia",
@@ -84,6 +88,15 @@ export const apps: App[] = [
     url: "https://figma.com",
     icon: "🎨",
     color: "#f24e1e",
+    category: "Design",
+  },
+  {
+    id: "solids-storybook",
+    name: "SoliDS Storybook",
+    description: "Design system — UI, token e documentazione",
+    url: "https://soli92.github.io/solids/",
+    icon: "📚",
+    color: "#3b82f6",
     category: "Design",
   },
   {

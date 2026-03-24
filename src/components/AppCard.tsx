@@ -34,11 +34,11 @@ export default function AppCard({ app, index }: AppCardProps) {
 
         {/* Nome */}
         <div className="flex flex-col gap-0.5 min-w-0 w-full">
-          <span className="text-sm font-semibold text-white/90 leading-tight truncate">
+          <span className="text-sm font-semibold text-foreground leading-tight truncate">
             {app.name}
           </span>
           {app.description && (
-            <span className="text-xs text-white/40 leading-tight line-clamp-2">
+            <span className="text-xs text-muted-foreground leading-tight line-clamp-2">
               {app.description}
             </span>
           )}
@@ -46,7 +46,7 @@ export default function AppCard({ app, index }: AppCardProps) {
 
         {/* Pinned badge */}
         {app.pinned && (
-          <span className="text-xs px-2 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 font-medium">
+          <span className="text-xs px-2 py-0.5 rounded-full bg-primary/15 text-primary border border-primary/30 font-medium">
             ⭐ Preferita
           </span>
         )}

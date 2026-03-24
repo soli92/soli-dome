@@ -1,8 +1,8 @@
+@import "@soli92/solids/css/index.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
 * {
   box-sizing: border-box;
@@ -15,36 +15,42 @@ html {
 }
 
 body {
-  font-family: 'Inter', sans-serif;
-  background: #080C14;
-  color: #ffffff;
+  font-family: var(--sd-font-body), system-ui, -apple-system, sans-serif;
+  background: var(--background);
+  color: var(--foreground);
   overflow-x: hidden;
   overflow-y: scroll;
   min-height: 100vh;
   -webkit-overflow-scrolling: touch;
 }
 
-/* Scrollbar sottile */
-::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
-::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
-
-/* Background animato */
-.bg-mesh {
-  background-color: #080C14;
-  background-image:
-    radial-gradient(ellipse 80% 50% at 20% 10%, rgba(99, 102, 241, 0.12) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 40% at 80% 80%, rgba(139, 92, 246, 0.08) 0%, transparent 60%),
-    radial-gradient(ellipse 40% 30% at 50% 50%, rgba(59, 130, 246, 0.05) 0%, transparent 60%);
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: color-mix(in srgb, var(--border) 70%, var(--foreground));
 }
 
-/* Glass card */
+.bg-mesh {
+  background-color: var(--background);
+  background-image:
+    radial-gradient(ellipse 80% 50% at 20% 10%, color-mix(in srgb, var(--primary) 18%, transparent) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% 80%, color-mix(in srgb, var(--sd-color-violet-500, #8b5cf6) 12%, transparent) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 30% at 50% 50%, color-mix(in srgb, var(--primary) 8%, transparent) 0%, transparent 60%);
+}
+
 .glass {
-  background: rgba(255, 255, 255, 0.04);
+  background: color-mix(in srgb, var(--card) 65%, transparent);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.07);
+  border: 1px solid color-mix(in srgb, var(--border) 80%, transparent);
 }
 
 .glass-hover {
@@ -52,27 +58,25 @@ body {
 }
 
 .glass-hover:hover {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.14);
+  background: color-mix(in srgb, var(--card) 85%, transparent);
+  border-color: color-mix(in srgb, var(--border) 100%, transparent);
   transform: translateY(-3px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  box-shadow: var(--sd-shadow-lg);
 }
 
-/* Search input */
 .search-input {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: color-mix(in srgb, var(--muted) 40%, transparent);
+  border: 1px solid color-mix(in srgb, var(--border) 60%, transparent);
   transition: all 0.2s ease;
 }
 
 .search-input:focus {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(99, 102, 241, 0.5);
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+  background: color-mix(in srgb, var(--muted) 70%, transparent);
+  border-color: var(--ring);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--ring) 25%, transparent);
   outline: none;
 }
 
-/* Category pill */
 .pill {
   transition: all 0.2s ease;
   cursor: pointer;
@@ -80,29 +84,33 @@ body {
 }
 
 .pill:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: color-mix(in srgb, var(--muted) 50%, transparent);
 }
 
 .pill-active {
-  background: rgba(99, 102, 241, 0.2) !important;
-  border-color: rgba(99, 102, 241, 0.5) !important;
-  color: #a5b4fc !important;
+  background: color-mix(in srgb, var(--primary) 22%, transparent) !important;
+  border-color: color-mix(in srgb, var(--primary) 45%, transparent) !important;
+  color: var(--primary) !important;
 }
 
-/* App icon glow */
 .icon-glow {
   transition: all 0.25s ease;
 }
 
 .app-card:hover .icon-glow {
   filter: brightness(1.2) saturate(1.3);
-  box-shadow: 0 8px 24px var(--glow-color, rgba(99,102,241,0.4));
+  box-shadow: 0 8px 24px var(--glow-color, color-mix(in srgb, var(--primary) 35%, transparent));
 }
 
-/* Animazioni */
 @keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(16px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .fade-in-up {
@@ -110,25 +118,42 @@ body {
 }
 
 @keyframes pulse-slow {
-  0%, 100% { opacity: 0.6; }
-  50%       { opacity: 1; }
+  0%,
+  100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
 }
 
-.pulse-slow { animation: pulse-slow 3s ease-in-out infinite; }
+.pulse-slow {
+  animation: pulse-slow 3s ease-in-out infinite;
+}
 
-/* Install banner */
 .install-banner {
-  background: linear-gradient(135deg, rgba(99,102,241,0.15), rgba(139,92,246,0.15));
-  border: 1px solid rgba(99,102,241,0.3);
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--primary) 18%, transparent),
+    color-mix(in srgb, var(--sd-color-violet-500, #8b5cf6) 15%, transparent)
+  );
+  border: 1px solid color-mix(in srgb, var(--primary) 35%, transparent);
   backdrop-filter: blur(20px);
 }
 
-/* Safe area mobile */
-.safe-bottom { padding-bottom: env(safe-area-inset-bottom); }
-.safe-top    { padding-top: env(safe-area-inset-top); }
+.safe-bottom {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+.safe-top {
+  padding-top: env(safe-area-inset-top);
+}
 
-/* Mobile tap highlight */
 @media (max-width: 768px) {
-  * { -webkit-tap-highlight-color: transparent; }
-  .app-card:active { transform: scale(0.95); transition: transform 0.1s ease; }
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+  .app-card:active {
+    transform: scale(0.95);
+    transition: transform 0.1s ease;
+  }
 }

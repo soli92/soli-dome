@@ -4,8 +4,8 @@
   "description": "Il tuo portale personale per accedere a tutte le tue applicazioni",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#0f0f1a",
-  "theme_color": "#6366f1",
+  "background_color": "#070714",
+  "theme_color": "#06b6d4",
   "orientation": "portrait-primary",
   "icons": [
     {

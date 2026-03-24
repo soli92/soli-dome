@@ -1,28 +1,15 @@
 import type { Config } from "tailwindcss";
 
+const solidsPreset = require("@soli92/solids/tailwind-preset") as Config;
+
 const config: Config = {
+  presets: [solidsPreset],
   content: [
-    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     extend: {
-      fontFamily: {
-        sans: ["Inter", "system-ui", "sans-serif"],
-      },
-      colors: {
-        dome: {
-          bg: "#0a0a0f",
-          surface: "#12121a",
-          card: "#1a1a28",
-          border: "#2a2a3d",
-          accent: "#6c63ff",
-          accent2: "#a78bfa",
-          text: "#e2e2f0",
-          muted: "#6b6b8a",
-        },
-      },
       animation: {
         "fade-in": "fadeIn 0.4s ease forwards",
         "slide-up": "slideUp 0.4s ease forwards",
@@ -44,7 +31,6 @@ const config: Config = {
       },
     },
   },
-  plugins: [],
 };
 
 export default config;

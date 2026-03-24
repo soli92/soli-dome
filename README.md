@@ -1,50 +1,54 @@
-# 🌐 Soli Dome
+# Soli Dome
 
-Portale personale per accedere a tutte le tue applicazioni, con design dark/glassmorphism.
+Portale personale per aprire le tue app da un’unica home: ricerca, categorie, preferiti e modal per aggiungere link. UI dark con stile glass / vetro.
 
-## ✨ Features
+## Avvio
 
-- 🔍 **Ricerca live** — filtra le app in tempo reale
-- 📂 **Categorie** — filtra per tipo di app
-- 📌 **Preferiti** — le app pinnate appaiono sempre in cima
-- ➕ **Aggiungi app** — modal per aggiungere nuove app al volo
-- 🌙 **Dark mode** — design glassmorphism dark
-- 📱 **Responsive** — funziona su mobile, tablet e desktop
-- ⚡ **Veloce** — Next.js 14 + Tailwind CSS
-
-## 🚀 Come iniziare
+Richiede **Node 24+** (vedi `engines` in `package.json`).
 
 ```bash
 npm install
 npm run dev
 ```
 
-Apri [http://localhost:3000](http://localhost:3000)
+[http://localhost:3000](http://localhost:3000)
 
-## 🛠️ Personalizzare le app
+## Personalizzare le app
 
-Modifica il file `src/data/apps.ts` per aggiungere, rimuovere o modificare le app nel portale.
+Modifica [`src/data/apps.ts`](./src/data/apps.ts): ogni voce ha `id`, `name`, `description`, `url`, `icon`, `category`, `color`, opzionale `pinned` per i preferiti.
 
-```ts
-{
-  id: "1",
-  name: "La mia App",
-  description: "Descrizione breve",
-  url: "https://...",
-  icon: "🚀",
-  category: "Sviluppo",
-  color: "#6c63ff",
-  pinned: true,  // opzionale: appare nei preferiti
-}
+È presente anche un test sui dati in [`src/data/apps.test.ts`](./src/data/apps.test.ts).
+
+## Test
+
+| Comando | Descrizione |
+|---------|-------------|
+| `npm run test` | Vitest (unit, una esecuzione) |
+| `npm run test:watch` | Vitest in watch |
+| `npm run test:coverage` | Con copertura |
+| `npm run test:e2e` | Playwright |
+| `npm run test:all` | Unit + e2e |
+
+## Stack
+
+- **Next.js** 16, **React** 19, **TypeScript**
+- **Tailwind CSS** + **`@soli92/solids`** (design system: token e preset)
+- **Lucide React** (icone)
+- **Vitest** + Testing Library, **Playwright** (e2e)
+
+## Lint
+
+```bash
+npm run lint
 ```
 
-## 🏗️ Tech Stack
+## Build produzione
 
-- **Next.js 14** — framework React
-- **TypeScript** — type safety
-- **Tailwind CSS** — styling
-- **Lucide React** — icone
+```bash
+npm run build
+npm start
+```
 
 ---
 
-*Built with ✦ by Soli*
+Portale e contenuti: uso personale.

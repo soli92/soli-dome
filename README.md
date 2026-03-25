@@ -4,7 +4,7 @@ Portale personale per aprire le tue app da un’unica home: ricerca, categorie, 
 
 ## Avvio
 
-Richiede **Node 24+** (vedi `engines` in `package.json`).
+Richiede **Node.js 22+** (vedi `engines` in `package.json` e **`.nvmrc`**). Il file **`.npmrc`** forza `registry=https://registry.npmjs.org/` e `tag=latest` per install coerenti.
 
 ```bash
 npm install
@@ -23,7 +23,7 @@ Modifica [`src/data/apps.ts`](./src/data/apps.ts): ogni voce ha `id`, `name`, `d
 
 | Comando | Descrizione |
 |---------|-------------|
-| `npm run test` | Vitest (unit, una esecuzione) |
+| `npm run test` | Vitest (unit, **happy-dom**, pool `threads`) |
 | `npm run test:watch` | Vitest in watch |
 | `npm run test:coverage` | Con copertura |
 | `npm run test:e2e` | Playwright |
@@ -48,6 +48,10 @@ npm run lint
 npm run build
 npm start
 ```
+
+## CI e changelog
+
+Questo repo **non** include al momento workflow GitHub Actions nel tree: test e build si eseguono in locale o sul provider di deploy (es. Vercel). **Changelog** automatico non configurato; la storia è in Git.
 
 ---
 

@@ -2,6 +2,8 @@
 
 Portale personale per aprire le tue app da un’unica home: ricerca, categorie, preferiti e modal per aggiungere link. UI dark con stile glass / vetro.
 
+Contesto operativo per assistenti AI: **[`AGENTS.md`](./AGENTS.md)**.
+
 ## Avvio
 
 Richiede **Node.js 22+** (vedi `engines` in `package.json` e **`.nvmrc`**). Il file **`.npmrc`** forza `registry=https://registry.npmjs.org/` e `tag=latest` per install coerenti.

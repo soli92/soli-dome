@@ -55,6 +55,16 @@ export const apps: App[] = [
     pinned: true,
   },
   {
+    id: "soli-dungeon-master",
+    name: "Soli Dungeon Master",
+    description: "Campagne D&D, personaggi, dadi e wiki — frontend + API",
+    url: "https://soli-dm-fe.vercel.app/",
+    icon: "🎲",
+    color: "#b45309",
+    category: "Mie App",
+    pinned: true,
+  },
+  {
     id: "github",
     name: "GitHub",
     description: "Repository e codice sorgente",

@@ -8,7 +8,7 @@ Memoria di sviluppo AI-assisted. Annotazioni sui prompt, decisioni e pattern eme
 
 **Soli Dome**: portale personale (Next.js) con griglia app, ricerca, categorie, preferiti, modal “aggiungi app”, PWA, UI **glass** dark e dati statici in `src/data/apps.ts`. Design system **@soli92/solids**. Test **Vitest** e **Playwright**.
 
-**Stack AI usato (inferito)**: **Cursor** — `2d9d9c6 chore: add AGENTS.md, README link, Cursor agents-context rule`. Commit `🎨 Redesign…` suggeriscono sessioni di polishing UI assistite (inferenza moderata).
+**Stack AI usato (inferito; aggiornato 2026-04-22)**: **Cursor** — `2d9d9c6` + `.cursor/rules/agents-context.mdc`. Commit `🎨 Redesign…` su più componenti. Nessun SDK LLM nel portale. Test **Vitest/Playwright** (`7e3ac8f`).
 
 **Periodo di sviluppo**: 2026-03-21 (`e5ddc07` Initial commit) → 2026-04-08 (`b8943b4` bump SoliDS).
 
@@ -32,9 +32,14 @@ Memoria di sviluppo AI-assisted. Annotazioni sui prompt, decisioni e pattern eme
 
 - **Dati app** centralizzati in TypeScript (`7841c75 feat: add apps data`) invece che solo JSON statico.
 
-**Prompt chiave usati**: > [TODO da compilare manualmente]
+**Prompt chiave usati**
 
-**Lezioni apprese**: > [TODO da compilare manualmente]
+> **Prompt [inferito]**: "Crea app Next con dati statici `apps.ts`, layout glass dark, SearchBar, CategoryFilter, AppCard, AddAppModal."
+> *Evidenza*: `7841c75`–`35340c0`, sequenza `feat: add …`.
+
+**Lezioni apprese**
+
+- Tenere **export named** di `apps`/`categories` coerenti evita errori runtime silenziosi (`8269fef`, `e7c4cc5`).
 
 ### Fase 2 — PWA offline, icone, meta, fix export dati
 
@@ -50,9 +55,14 @@ Memoria di sviluppo AI-assisted. Annotazioni sui prompt, decisioni e pattern eme
 
 - **PWA-first** sul portale personale (uso da home screen mobile).
 
-**Prompt chiave usati**: > [TODO da compilare manualmente]
+**Prompt chiave usati**
 
-**Lezioni apprese**: > [TODO da compilare manualmente]
+> **Prompt [inferito]**: "Aggiungi service worker, manifest PWA, icone 192/512, meta tag iOS, banner install, correggi export dati."
+> *Evidenza*: `4742737`–`28de86c`, `8269fef`.
+
+**Lezioni apprese**
+
+- **PWA** richiede coerenza tra `layout.tsx`, manifest e path icone (`304ca1b`, `0b7e553`).
 
 ### Fase 3 — Scroll desktop/mobile e redesign “glass”
 
@@ -68,9 +78,14 @@ Memoria di sviluppo AI-assisted. Annotazioni sui prompt, decisioni e pattern eme
 
 - Scroll su **html/body** libero invece che wrapper overflow (`dc56b13`, `55af31d`).
 
-**Prompt chiave usati**: > [TODO da compilare manualmente]
+**Prompt chiave usati**
 
-**Lezioni apprese**: > [TODO da compilare manualmente]
+> **Prompt [inferito]**: "Redesign mobile-first con mesh background e glass; risolvi scroll touchpad rimuovendo overflow hidden annidati."
+> *Evidenza*: `952403b`–`18085d7`, `1a2e4a2`–`55af31d`.
+
+**Lezioni apprese**
+
+- **overflow: hidden** su wrapper intermedi rompe scroll/touchpad su desktop (`1a2e4a2`, `55af31d`).
 
 ### Fase 4 — Tile Storybook, test stack, app aggiuntive, bump SoliDS
 
@@ -86,9 +101,14 @@ Memoria di sviluppo AI-assisted. Annotazioni sui prompt, decisioni e pattern eme
 
 - **Playwright** per e2e oltre Vitest (`7e3ac8f`).
 
-**Prompt chiave usati**: > [TODO da compilare manualmente]
+**Prompt chiave usati**
 
-**Lezioni apprese**: > [TODO da compilare manualmente]
+> **Prompt [inferito]**: "Aggiungi Vitest/Playwright, tile Storybook, app pinned (Casa Mia, Soli DM, …), aggiorna README stack, bump SoliDS."
+> *Evidenza*: `7e3ac8f`, `cfcdde1`, `35a2f84`, `b8943b4`.
+
+**Lezioni apprese**
+
+- **Dati app** (`src/data/apps.ts`) vanno aggiornati quando si aggiunge un’app reale (`35a2f84`, `apps.test.ts` in `AGENTS.md`).
 
 ---
 
@@ -133,10 +153,29 @@ Memoria di sviluppo AI-assisted. Annotazioni sui prompt, decisioni e pattern eme
 
 ## Punti aperti / note per il futuro
 
-> [TODO da compilare manualmente: sincronizzazione lista app con deploy reali, eventuale persistenza preferiti lato server]
+- **grep `TODO|FIXME|HACK|XXX`** in `src/`: nessun match prioritario in questa passata.
+- **`src/data/apps.ts`**: URL hardcoded (`https://…`) — sincronizzare manualmente con deploy reali quando cambiano domini Vercel.
+- **Debito tecnico inferito**: preferiti “pinned” solo lato client — nessuna persistenza server nel modello dati attuale.
+- **Debito tecnico inferito**: Playwright e2e dipendono da config locale (`playwright.config.ts`) — verificare esecuzione in CI vs solo locale.
+- **Debito tecnico inferito**: `AddAppModal` consente URL arbitrari — validazione XSS/open redirect non deducibile dal solo git.
 
 ---
 
-> **Nota metodologica**: questo file è stato generato retroattivamente analizzando la history del repo. Le sezioni con `> [TODO da compilare manualmente]` richiedono la memoria del developer e non possono essere inferite dalla sola analisi automatica. Integra progressivamente con annotazioni manuali mentre lavori alle prossime fasi del progetto.
+> **Nota metodologica**: completamento 2026-04-22; verificare `apps.test.ts` dopo ogni modifica a `apps.ts`.
+
+---
+
+## Metodologia compilazione automatica
+
+Completamento autonomo il **22 aprile 2026** analizzando:
+
+- **49** commit (stima iniziale)
+- **~8** file (`src/data/apps.ts`, `src/data/apps.test.ts`, `AGENTS.md`, `playwright.config.ts`, `package.json`, `app/page.tsx`, `.cursor/rules`)
+- **0** TODO/FIXME rilevanti dal grep workspace
+
+**Punti di minore confidenza:**
+
+- Elenco app aggiornato dopo commit `53079d0` (Soli Prof) potrebbe non essere riflesso in questa copia locale se non pullato.
+- Validazione sicurezza URL non ispezionata nel codice in questa passata.
 
 ---

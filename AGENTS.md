@@ -1,6 +1,6 @@
 # AGENTS.md — contesto per assistenti AI
 
-Riassunto operativo per **Soli Dome** (portale app / home links). Dettaglio: **`README.md`**. Stato file: **`git status`**.
+Riassunto operativo per **Soli Dome** (portale app / home links). Dettaglio: **`README.md`**. Stato file: **`git status`**. Memoria sviluppo AI-assisted: **`AI_LOG.md`**.
 
 **Aggiornato:** 2025-03-26
 
@@ -20,7 +20,7 @@ Riassunto operativo per **Soli Dome** (portale app / home links). Dettaglio: **`
 
 ## File utili
 
-`README.md` · `src/data/apps.ts` · `playwright.config.ts`
+`README.md` · `AI_LOG.md` · `src/data/apps.ts` · `playwright.config.ts`
 
 ## Regole per l’agente
 

@@ -55,6 +55,16 @@ export const apps: App[] = [
     pinned: true,
   },
   {
+    id: "soli-prof",
+    name: "Soli Prof",
+    description: "Tutor AI per imparare AI engineering in pubblico",
+    url: "https://soli-prof.vercel.app/",
+    icon: "🎓",
+    color: "#0d9488",
+    category: "Mie App",
+    pinned: true,
+  },
+  {
     id: "soli-dungeon-master",
     name: "Soli Dungeon Master",
     description: "Campagne D&D, personaggi, dadi e wiki — frontend + API",

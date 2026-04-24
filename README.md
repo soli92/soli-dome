@@ -25,7 +25,7 @@ Modifica [`src/data/apps.ts`](./src/data/apps.ts): ogni voce ha `id`, `name`, `d
 
 | Comando | Descrizione |
 |---------|-------------|
-| `npm run test` | Vitest (unit, **happy-dom**, pool `threads`) |
+| `npm run test` | Vitest (unit, **happy-dom**, pool `threads`; include `src/solids-package.test.ts` per range SoliDS) |
 | `npm run test:watch` | Vitest in watch |
 | `npm run test:coverage` | Con copertura |
 | `npm run test:e2e` | Playwright |
@@ -34,7 +34,7 @@ Modifica [`src/data/apps.ts`](./src/data/apps.ts): ogni voce ha `id`, `name`, `d
 ## Stack
 
 - **Next.js** 16, **React** 19, **TypeScript**
-- **Tailwind CSS** + **`@soli92/solids`** (design system: token e preset)
+- **Tailwind CSS** + **`@soli92/solids` ^1.7.0** (token e preset); **Google Fonts** in `src/app/layout.tsx` (linee guida SoliDS 1.7)
 - **Lucide React** (icone)
 - **Vitest** + Testing Library, **Playwright** (e2e)
 

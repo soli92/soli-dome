@@ -6,7 +6,7 @@ Memoria di sviluppo AI-assisted. Annotazioni sui prompt, decisioni e pattern eme
 
 ## Overview del progetto
 
-**Soli Dome**: portale personale (Next.js) con griglia app, ricerca, categorie, preferiti, modal “aggiungi app”, PWA, UI **glass** dark e dati statici in `src/data/apps.ts`. Design system **@soli92/solids**. Test **Vitest** e **Playwright**.
+**Soli Dome**: portale personale (Next.js) con griglia app, ricerca, categorie, preferiti, modal “aggiungi app”, PWA, UI **glass** dark e dati statici in `src/data/apps.ts`. Design system **@soli92/solids ^1.7.0** (font in layout, test `src/solids-package.test.ts`). Test **Vitest** e **Playwright**.
 
 **Stack AI usato (inferito; aggiornato 2026-04-22)**: **Cursor** — `2d9d9c6` + `.cursor/rules/agents-context.mdc`. Commit `🎨 Redesign…` su più componenti. Nessun SDK LLM nel portale. Test **Vitest/Playwright** (`7e3ac8f`).
 
@@ -109,6 +109,12 @@ Memoria di sviluppo AI-assisted. Annotazioni sui prompt, decisioni e pattern eme
 **Lezioni apprese**
 
 - **Dati app** (`src/data/apps.ts`) vanno aggiornati quando si aggiunge un’app reale (`35a2f84`, `apps.test.ts` in `AGENTS.md`).
+
+### Fase 5 — Bump @soli92/solids 1.7.0, font stack, test dipendenza (2026-04-24)
+
+**Cosa è stato fatto**: dipendenza **`@soli92/solids` ^1.7.0**; link **Google Fonts** in `src/app/layout.tsx`; **`src/solids-package.test.ts`** in Vitest; README / AGENTS / AI_LOG aggiornati.
+
+**Lezioni**: tema **cyberpunk** usa font da token — caricare le famiglie da Google Fonts evita fallback imprevisti.
 
 ---
 

@@ -2,7 +2,7 @@
 
 Portale personale per aprire le tue app da un’unica home: ricerca, categorie, preferiti e modal per aggiungere link. UI dark con stile glass / vetro.
 
-Contesto operativo per assistenti AI: **[`AGENTS.md`](./AGENTS.md)**.
+Contesto operativo per assistenti AI: **[`AGENTS.md`](./AGENTS.md)**. Soli Dome è in [**Soli Prof** RAG `CORPUS_REPOS`](https://github.com/soli92/soli-prof); un `push` può notificare re-ingest (webhook). Stesso stack di test **Vitest** invariato.
 
 ## Avvio
 

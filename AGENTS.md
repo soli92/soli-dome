@@ -22,6 +22,10 @@ Riassunto operativo per **Soli Dome** (portale app / home links). Dettaglio: **`
 
 `README.md` · `AI_LOG.md` · `src/data/apps.ts` · `src/solids-package.test.ts` · `playwright.config.ts`
 
+### Integrazione Soli Prof (RAG / webhook)
+
+Questo repository è in **`CORPUS_REPOS`** su [soli-prof](https://github.com/soli92/soli-prof) (`lib/rag-service/config.ts`). Un webhook GitHub su **`push`** verso `https://soli-prof.vercel.app/api/webhooks/github` può attivare **re-ingest** (HMAC; segreto solo lato Soli Prof / GitHub). I test e i comandi locali del repo **non** dipendono da quel canale. Dettagli: [soli-prof `AGENTS.md`](https://github.com/soli92/soli-prof/blob/main/AGENTS.md), `scripts/setup-webhooks.sh` nel repo Soli Prof.
+
 ## Regole per l’agente
 
 - UI dark / glass: rispettare pattern e token **SoliDS** già usati nel progetto.

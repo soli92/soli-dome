@@ -21,6 +21,7 @@ Memoria di sviluppo AI-assisted. Annotazioni sui prompt, decisioni e pattern eme
 - **`src/data/apps.ts`**: aggiunta tile **Health, Wand and Fire** (categoria Mie App, URL produzione Vercel, icona, colore), allineata al [repo](https://github.com/soli92/health-wand-and-fire).
 - **Test**: `src/data/apps.test.ts` asserisce presenza `id` `health-wand-and-fire` e URL atteso.
 - **Doc**: README, AGENTS.md, questo file.
+- **Soli Prof**: `AGENTS.md` — integrazione webhook re-ingest ([soli-prof](https://github.com/soli92/soli-prof) `CORPUS_REPOS`); nessun cambiamento a test o runtime.
 
 ---
 

@@ -13,4 +13,11 @@ describe("apps data", () => {
       expect(app.url).toMatch(/^https?:\/\//);
     }
   });
+
+  it("include Health, Wand and Fire nel portale", () => {
+    const hwf = apps.find((a) => a.id === "health-wand-and-fire");
+    expect(hwf).toBeDefined();
+    expect(hwf?.name).toBe("Health, Wand and Fire");
+    expect(hwf?.url).toBe("https://health-wand-and-fire.vercel.app/");
+  });
 });

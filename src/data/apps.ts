@@ -75,6 +75,16 @@ export const apps: App[] = [
     pinned: true,
   },
   {
+    id: "health-wand-and-fire",
+    name: "Health, Wand and Fire",
+    description: "Shooter arcade fantasy: mago vs creature oscure, onde guidate da Claude",
+    url: "https://health-wand-and-fire.vercel.app/",
+    icon: "🧙",
+    color: "#7c3aed",
+    category: "Mie App",
+    pinned: true,
+  },
+  {
     id: "github",
     name: "GitHub",
     description: "Repository e codice sorgente",

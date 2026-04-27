@@ -17,7 +17,7 @@ npm run dev
 
 ## Personalizzare le app
 
-Modifica [`src/data/apps.ts`](./src/data/apps.ts): ogni voce ha `id`, `name`, `description`, `url`, `icon`, `category`, `color`, opzionale `pinned` per i preferiti.
+Modifica [`src/data/apps.ts`](./src/data/apps.ts): ogni voce ha `id`, `name`, `description`, `url`, `icon`, `category`, `color`, opzionale `pinned` per i preferiti. Tra le app “Mie App” compaiono ad es. Casa Mia, Soli Prof, Soli Dungeon Master e **Health, Wand and Fire** (`https://health-wand-and-fire.vercel.app/`).
 
 È presente anche un test sui dati in [`src/data/apps.test.ts`](./src/data/apps.test.ts).
 

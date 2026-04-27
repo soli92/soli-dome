@@ -16,6 +16,14 @@ Memoria di sviluppo AI-assisted. Annotazioni sui prompt, decisioni e pattern eme
 
 ---
 
+## Aggiornamento 2026-04-27 — app Health, Wand and Fire
+
+- **`src/data/apps.ts`**: aggiunta tile **Health, Wand and Fire** (categoria Mie App, URL produzione Vercel, icona, colore), allineata al [repo](https://github.com/soli92/health-wand-and-fire).
+- **Test**: `src/data/apps.test.ts` asserisce presenza `id` `health-wand-and-fire` e URL atteso.
+- **Doc**: README, AGENTS.md, questo file.
+
+---
+
 ## Fasi di sviluppo (inferite dal history)
 
 ### Fase 1 — Init Next + dati app + componenti base
@@ -167,7 +175,7 @@ Memoria di sviluppo AI-assisted. Annotazioni sui prompt, decisioni e pattern eme
 
 ---
 
-> **Nota metodologica**: completamento 2026-04-22; verificare `apps.test.ts` dopo ogni modifica a `apps.ts`.
+> **Nota metodologica**: completamento 2026-04-22; **2026-04-27** vedi sezione *Health, Wand and Fire*; verificare `apps.test.ts` dopo ogni modifica a `apps.ts`.
 
 ---
 

@@ -65,7 +65,7 @@ function HomeContent() {
             <div className="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between gap-4">
               <div className="flex items-center gap-2.5 flex-shrink-0">
                 <div className="w-8 h-8 rounded-xl bg-primary/15 border border-primary/30 flex items-center justify-center">
-                  <Grid3X3 className="w-4 h-4 text-primary" />
+                  <Grid3X3 className="w-4 h-4 text-[var(--sd-color-icon-primary)]" />
                 </div>
                 <span className="font-bold text-foreground text-base tracking-tight">
                   Soli <span className="text-primary">Dome</span>
@@ -80,7 +80,7 @@ function HomeContent() {
                 onClick={() => setShowModal(true)}
                 className="flex-shrink-0 flex items-center gap-2 px-4 py-2 rounded-xl bg-primary/15 border border-primary/30 text-primary text-sm font-medium hover:bg-primary/25 transition-all"
               >
-                <Plus className="w-4 h-4" />
+                <Plus className="w-4 h-4 text-[var(--sd-color-icon-primary)]" />
                 <span className="hidden sm:inline">Aggiungi</span>
               </button>
             </div>
@@ -126,7 +126,7 @@ function HomeContent() {
           {pinned.length > 0 && (
             <section className="mb-10">
               <div className="flex items-center gap-2 mb-4">
-                <Sparkles className="w-4 h-4 text-primary" />
+                <Sparkles className="w-4 h-4 text-[var(--sd-color-icon-primary)]" />
                 <h2 className="text-xs font-semibold text-muted-foreground uppercase tracking-widest">
                   Preferite
                 </h2>
@@ -143,7 +143,7 @@ function HomeContent() {
             <section>
               {pinned.length > 0 && (
                 <div className="flex items-center gap-2 mb-4">
-                  <Grid3X3 className="w-4 h-4 text-muted-foreground/70" />
+                  <Grid3X3 className="w-4 h-4 text-[var(--sd-color-icon-muted)]" />
                   <h2 className="text-xs font-semibold text-muted-foreground uppercase tracking-widest">
                     {activeCategory === "Tutte" ? "Tutte le app" : activeCategory}
                   </h2>

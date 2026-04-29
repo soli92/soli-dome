@@ -42,7 +42,7 @@ body {
   background-color: var(--background);
   background-image:
     radial-gradient(ellipse 80% 50% at 20% 10%, color-mix(in srgb, var(--primary) 18%, transparent) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 40% at 80% 80%, color-mix(in srgb, var(--sd-color-violet-500, #8b5cf6) 12%, transparent) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% 80%, color-mix(in srgb, var(--sd-color-violet-500) 12%, transparent) 0%, transparent 60%),
     radial-gradient(ellipse 40% 30% at 50% 50%, color-mix(in srgb, var(--primary) 8%, transparent) 0%, transparent 60%);
 }
 
@@ -135,7 +135,7 @@ body {
   background: linear-gradient(
     135deg,
     color-mix(in srgb, var(--primary) 18%, transparent),
-    color-mix(in srgb, var(--sd-color-violet-500, #8b5cf6) 15%, transparent)
+    color-mix(in srgb, var(--sd-color-violet-500) 15%, transparent)
   );
   border: 1px solid color-mix(in srgb, var(--primary) 35%, transparent);
   backdrop-filter: blur(20px);

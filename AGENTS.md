@@ -6,7 +6,7 @@ Riassunto operativo per **Soli Dome** (portale app / home links). Dettaglio: **`
 
 ## Repo
 
-**Next.js 16**, **React 19**, Tailwind + **`@soli92/solids` ^1.7.0**, **Lucide**. Node **22+**. Font stack in **`src/app/layout.tsx`**. Dati app in **`src/data/apps.ts`** (incl. **Health, Wand and Fire**; test in `apps.test.ts`, più **`src/solids-package.test.ts`** per il range SoliDS).
+**Next.js 16**, **React 19**, Tailwind + **`@soli92/solids` ^1.13.1**, **Lucide**. Node **22+**. Font stack in **`src/app/layout.tsx`**. Dati app in **`src/data/apps.ts`** (incl. **Health, Wand and Fire**; test in `apps.test.ts`, più **`src/solids-package.test.ts`** per il range SoliDS).
 
 ## Cosa fare dopo (checklist)
 

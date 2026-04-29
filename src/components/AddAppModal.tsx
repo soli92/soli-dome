@@ -73,7 +73,7 @@ export default function AddAppModal({ onAdd, onClose }: AddAppModalProps) {
           <h2 className="text-lg font-bold text-foreground">Aggiungi app</h2>
           <button
             onClick={onClose}
-            className="w-8 h-8 rounded-xl glass flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
+            className="w-8 h-8 rounded-[var(--sd-radius-lg)] glass flex items-center justify-center text-[var(--sd-color-icon-muted)] hover:text-[var(--sd-color-icon-primary)] transition-colors"
           >
             <X className="w-4 h-4" />
           </button>
@@ -197,9 +197,9 @@ export default function AddAppModal({ onAdd, onClose }: AddAppModalProps) {
           <button
             type="submit"
             disabled={!name.trim() || !url.trim() || !normalizeAppUrl(url)}
-            className="w-full py-3.5 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 disabled:opacity-40 disabled:cursor-not-allowed font-semibold text-sm transition-all flex items-center justify-center gap-2 mt-1"
+            className="w-full py-3.5 rounded-[var(--sd-radius-lg)] bg-primary text-primary-foreground hover:bg-primary/90 disabled:opacity-40 disabled:cursor-not-allowed font-semibold text-sm transition-all flex items-center justify-center gap-2 mt-1"
           >
-            <Plus className="w-4 h-4" />
+            <Plus className="w-4 h-4 text-[var(--sd-color-icon-on-primary)]" />
             Aggiungi app
           </button>
         </form>

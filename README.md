@@ -34,7 +34,7 @@ Modifica [`src/data/apps.ts`](./src/data/apps.ts): ogni voce ha `id`, `name`, `d
 ## Stack
 
 - **Next.js** 16, **React** 19, **TypeScript**
-- **Tailwind CSS** + **`@soli92/solids` ^1.7.0** (token e preset); **Google Fonts** in `src/app/layout.tsx` (linee guida SoliDS 1.7)
+- **Tailwind CSS** + **`@soli92/solids` ^1.13.1** (token e preset); **Google Fonts** in `src/app/layout.tsx` (linee guida SoliDS 1.13.1)
 - **Lucide React** (icone)
 - **Vitest** + Testing Library, **Playwright** (e2e)
 

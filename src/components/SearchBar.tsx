@@ -10,7 +10,7 @@ interface SearchBarProps {
 export default function SearchBar({ value, onChange }: SearchBarProps) {
   return (
     <div className="relative w-full max-w-xl mx-auto">
-      <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground/60 pointer-events-none" />
+      <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[var(--sd-color-icon-muted)] pointer-events-none" />
       <input
         type="text"
         placeholder="Cerca un'app..."
@@ -23,7 +23,7 @@ export default function SearchBar({ value, onChange }: SearchBarProps) {
           type="button"
           aria-label="Cancella ricerca"
           onClick={() => onChange("")}
-          className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground/60 hover:text-foreground/80 transition-colors"
+          className="absolute right-4 top-1/2 -translate-y-1/2 text-[var(--sd-color-icon-muted)] hover:text-[var(--sd-color-icon-primary)] transition-colors"
         >
           <X className="w-4 h-4" />
         </button>

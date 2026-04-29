@@ -66,7 +66,7 @@ export default function InstallBanner() {
 
         <button
           onClick={handleDismiss}
-          className="absolute top-3 right-3 text-muted-foreground hover:text-foreground transition-colors"
+          className="absolute top-3 right-3 text-[var(--sd-color-icon-muted)] hover:text-[var(--sd-color-icon-primary)] transition-colors"
         >
           <X size={16} />
         </button>
@@ -92,9 +92,9 @@ export default function InstallBanner() {
           {!isIOS && (
             <button
               onClick={handleInstall}
-              className="flex items-center gap-1.5 bg-primary text-primary-foreground hover:bg-primary/90 text-xs font-semibold px-3 py-2 rounded-xl transition-colors flex-shrink-0"
+              className="flex items-center gap-1.5 bg-primary text-primary-foreground hover:bg-primary/90 text-xs font-semibold px-3 py-2 rounded-[var(--sd-radius-lg)] transition-colors flex-shrink-0"
             >
-              <Download size={14} />
+              <Download size={14} className="text-[var(--sd-color-icon-on-primary)]" />
               Installa
             </button>
           )}

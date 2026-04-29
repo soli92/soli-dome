@@ -1,6 +1,38 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
+const supportedThemes = [
+  "light",
+  "dark",
+  "fantasy",
+  "cyberpunk",
+  "90s-party",
+  "steampunk",
+  "ichigo",
+  "vegeta",
+  "zoro",
+  "captain-america",
+  "sasuke",
+  "inuyasha",
+] as const;
+
+const themeBootstrapScript = `
+(() => {
+  const themes = new Set(${JSON.stringify(supportedThemes)});
+  const themeKeys = ["soli-dome-theme", "theme", "data-theme"];
+  const selected = themeKeys
+    .map((key) => {
+      try {
+        return window.localStorage.getItem(key);
+      } catch {
+        return null;
+      }
+    })
+    .find((value) => typeof value === "string" && themes.has(value));
+  document.documentElement.setAttribute("data-theme", selected || "cyberpunk");
+})();
+`;
+
 export const metadata: Metadata = {
   title: "Soli Dome",
   description: "Il tuo portale personale per tutte le app",
@@ -30,6 +62,7 @@ export default function RootLayout({
   return (
     <html lang="it" data-theme="cyberpunk" suppressHydrationWarning>
       <head>
+        <script dangerouslySetInnerHTML={{ __html: themeBootstrapScript }} />
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />

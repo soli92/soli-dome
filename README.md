@@ -34,9 +34,15 @@ Modifica [`src/data/apps.ts`](./src/data/apps.ts): ogni voce ha `id`, `name`, `d
 ## Stack
 
 - **Next.js** 16, **React** 19, **TypeScript**
-- **Tailwind CSS** + **`@soli92/solids` ^1.13.1** (token e preset); **Google Fonts** in `src/app/layout.tsx` (linee guida SoliDS 1.13.1)
+- **Tailwind CSS** + **`@soli92/solids` ^1.14.1** (token e preset); **Google Fonts** in `src/app/layout.tsx` (linee guida SoliDS 1.14.1)
 - **Lucide React** (icone)
 - **Vitest** + Testing Library, **Playwright** (e2e)
+
+## Branding e PWA
+
+- Manifest gestito da App Router in `src/app/manifest.ts` (endpoint runtime `/manifest.webmanifest`)
+- Metadata/icona app in `src/app/layout.tsx`, con asset importati da `@soli92/solids/brand-assets`
+- Header e fallback di caricamento allineati al brand Soli (`src/components/SoliBrandLogo.tsx`, `src/components/SoliLogoLoader.tsx`)
 
 ## Lint
 

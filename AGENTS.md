@@ -2,11 +2,11 @@
 
 Riassunto operativo per **Soli Dome** (portale app / home links). Dettaglio: **`README.md`**. Stato file: **`git status`**. Memoria sviluppo AI-assisted: **`AI_LOG.md`**.
 
-**Aggiornato:** 2026-04-27
+**Aggiornato:** 2026-04-29
 
 ## Repo
 
-**Next.js 16**, **React 19**, Tailwind + **`@soli92/solids` ^1.13.1**, **Lucide**. Node **22+**. Font stack in **`src/app/layout.tsx`**. Dati app in **`src/data/apps.ts`** (incl. **Health, Wand and Fire**; test in `apps.test.ts`, più **`src/solids-package.test.ts`** per il range SoliDS).
+**Next.js 16**, **React 19**, Tailwind + **`@soli92/solids` ^1.14.1**, **Lucide**. Node **22+**. Font stack in **`src/app/layout.tsx`**. Dati app in **`src/data/apps.ts`** (incl. **Health, Wand and Fire**; test in `apps.test.ts`, più **`src/solids-package.test.ts`** per il range SoliDS). Branding/loader PWA: `src/components/SoliBrandLogo.tsx`, `src/components/SoliLogoLoader.tsx`, `src/app/manifest.ts`.
 
 ## Cosa fare dopo (checklist)
 
@@ -20,7 +20,7 @@ Riassunto operativo per **Soli Dome** (portale app / home links). Dettaglio: **`
 
 ## File utili
 
-`README.md` · `AI_LOG.md` · `src/data/apps.ts` · `src/solids-package.test.ts` · `playwright.config.ts`
+`README.md` · `AI_LOG.md` · `src/data/apps.ts` · `src/solids-package.test.ts` · `src/app/manifest.ts` · `src/components/SoliBrandLogo.tsx` · `src/components/SoliLogoLoader.tsx` · `playwright.config.ts`
 
 ### Integrazione Soli Prof (RAG / webhook)
 

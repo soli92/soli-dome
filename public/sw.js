@@ -1,9 +1,7 @@
-const CACHE_NAME = "soli-dome-v2";
+const CACHE_NAME = "soli-dome-v3";
 const STATIC_ASSETS = [
   "/",
-  "/manifest.json",
-  "/icons/icon-192x192.svg",
-  "/icons/icon-512x512.svg",
+  "/manifest.webmanifest",
 ];
 
 // Install: pre-cache assets statici

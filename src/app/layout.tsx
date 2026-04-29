@@ -1,5 +1,13 @@
 import type { Metadata, Viewport } from "next";
+import type { StaticImageData } from "next/image";
 import "./globals.css";
+import appIcon from "@soli92/solids/brand-assets/soli-category-icons/soli-icon-app-icon.png";
+import appleTouchIcon from "@soli92/solids/brand-assets/soli-category-icons/soli-icon-apple-touch.png";
+import faviconIcon from "@soli92/solids/brand-assets/soli-category-icons/soli-icon-favicon.png";
+
+function assetUrl(asset: string | StaticImageData): string {
+  return typeof asset === "string" ? asset : asset.src;
+}
 
 const supportedThemes = [
   "light",
@@ -36,14 +44,19 @@ const themeBootstrapScript = `
 export const metadata: Metadata = {
   title: "Soli Dome",
   description: "Il tuo portale personale per tutte le app",
-  manifest: "/manifest.json",
+  manifest: "/manifest.webmanifest",
   appleWebApp: {
     capable: true,
     statusBarStyle: "black-translucent",
     title: "Soli Dome",
   },
   icons: {
-    apple: "/icons/icon-192x192.svg",
+    icon: [
+      { url: assetUrl(faviconIcon), type: "image/png" },
+      { url: assetUrl(appIcon), type: "image/png" },
+    ],
+    apple: [{ url: assetUrl(appleTouchIcon), type: "image/png" }],
+    shortcut: [{ url: assetUrl(faviconIcon), type: "image/png" }],
   },
 };
 
@@ -66,7 +79,6 @@ export default function RootLayout({
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-        <link rel="apple-touch-icon" href="/icons/icon-192x192.svg" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link

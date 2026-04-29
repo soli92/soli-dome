@@ -10,6 +10,8 @@ import AppCard from "@/components/AppCard";
 import AddAppModal from "@/components/AddAppModal";
 import InstallBanner from "@/components/InstallBanner";
 import ServiceWorkerRegister from "@/components/ServiceWorkerRegister";
+import SoliBrandLogo from "@/components/SoliBrandLogo";
+import SoliLogoLoader from "@/components/SoliLogoLoader";
 
 function getGreeting() {
   const h = new Date().getHours();
@@ -64,12 +66,7 @@ function HomeContent() {
           <div className="glass border-b border-border/50 backdrop-blur-2xl">
             <div className="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between gap-4">
               <div className="flex items-center gap-2.5 flex-shrink-0">
-                <div className="w-8 h-8 rounded-xl bg-primary/15 border border-primary/30 flex items-center justify-center">
-                  <Grid3X3 className="w-4 h-4 text-[var(--sd-color-icon-primary)]" />
-                </div>
-                <span className="font-bold text-foreground text-base tracking-tight">
-                  Soli <span className="text-primary">Dome</span>
-                </span>
+                <SoliBrandLogo className="w-[124px] sm:w-[148px] h-auto" priority />
               </div>
 
               <div className="flex-1 max-w-md hidden sm:block">
@@ -168,11 +165,7 @@ function HomeContent() {
 
 export default function Home() {
   return (
-    <Suspense
-      fallback={
-        <div className="bg-mesh min-h-screen" aria-busy="true" aria-label="Caricamento" />
-      }
-    >
+    <Suspense fallback={<SoliLogoLoader />}>
       <HomeContent />
     </Suspense>
   );

@@ -85,6 +85,16 @@ export const apps: App[] = [
     pinned: true,
   },
   {
+    id: "soli-projects",
+    name: "Soli Projects",
+    description: "Portfolio personale e copilot di project management",
+    url: "https://soli-projects.vercel.app",
+    icon: "FolderKanban",
+    color: "#7c3aed",
+    category: "Mie App",
+    pinned: true,
+  },
+  {
     id: "github",
     name: "GitHub",
     description: "Repository e codice sorgente",

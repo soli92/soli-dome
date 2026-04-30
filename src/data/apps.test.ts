@@ -20,4 +20,10 @@ describe("apps data", () => {
     expect(hwf?.name).toBe("Health, Wand and Fire");
     expect(hwf?.url).toBe("https://health-wand-and-fire.vercel.app/");
   });
+
+  it("contains soli-projects", () => {
+    const app = apps.find((a) => a.id === "soli-projects");
+    expect(app).toBeDefined();
+    expect(app?.url).toBe("https://soli-projects.vercel.app");
+  });
 });

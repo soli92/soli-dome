@@ -85,6 +85,16 @@ export const apps: App[] = [
     pinned: true,
   },
   {
+    id: "soli-boy",
+    name: "Soli-boy",
+    description: "Emulatore multipiattaforma per arcade e console handheld (GB/GBC/GBA)",
+    url: "https://soli-boy.vercel.app/",
+    icon: "/icons/soli-boy.svg",
+    color: "#9bbc0f",
+    category: "Mie App",
+    pinned: true,
+  },
+  {
     id: "soli-projects",
     name: "Soli Projects",
     description: "Portfolio personale e copilot di project management",

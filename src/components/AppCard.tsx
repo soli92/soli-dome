@@ -29,7 +29,16 @@ export default function AppCard({ app, index }: AppCardProps) {
             className="absolute inset-0 opacity-20 rounded-2xl"
             style={{ background: `radial-gradient(circle at 30% 30%, ${app.color}, transparent 70%)` }}
           />
-          <span className="relative z-10">{app.icon}</span>
+          {/^\/|\.(svg|png|jpe?g|webp|gif)$/i.test(app.icon) ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={app.icon}
+              alt=""
+              className="relative z-10 w-9 h-9 object-contain"
+            />
+          ) : (
+            <span className="relative z-10">{app.icon}</span>
+          )}
         </div>
 
         {/* Nome */}
